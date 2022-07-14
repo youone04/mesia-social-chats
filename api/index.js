@@ -9,7 +9,7 @@ const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
 const conversationRoute = require("./routes/conversations");
-// const messageRoute = require("./routes/message");
+const messageRoute = require("./routes/message");
 const router = express.Router();
 const path = require("path");
 
@@ -53,7 +53,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/conversations", conversationRoute);
-// app.use("/api/messages", messageRoute);
+app.use("/api/messages", messageRoute);
 
 
 app.listen(8800, () => {
