@@ -1,7 +1,17 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import "./chatOnline.css";
 
-export default function ChatOnline() {
+export default function ChatOnline(props) {
+
+  const [friends , setFriends] = useState([]);
+  const [onlineFriends , setOnlineFriends] = useState([]);
+
+  useEffect(() => {
+
+  },[])
+
   return (
     <div className='chatOnline'>
         <div className="chatOnlineFriend">
