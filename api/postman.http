@@ -1,4 +1,4 @@
-
+### tambahkan juga extensi rest client jika di vscode belum ada
 ### harus ada conversation dulu agar bisa chat
 
 POST http://localhost:8800/api/conversations HTTP/1.1
