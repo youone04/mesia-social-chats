@@ -20,8 +20,8 @@ export default function Rightbar({ user }) {
     const getFriends = async () => {
 
       try {
-        const friendList = await axios.get("/users/friends/" + user?._id);
-        setFriends(friendList.data);
+        const friendList = user?._id && await axios.get("/users/friends/" + user?._id);
+        setFriends(friendList?.data || []);
       } catch (err) {
         console.log(err);
       }
@@ -110,10 +110,11 @@ export default function Rightbar({ user }) {
         </div>
         <h4 className="rightbarTitle">User friends</h4>
         <div className="rightbarFollowings">
-          {friends.map((friend) => (
+          {friends.map((friend, id) => (
             <Link
               to={"/profile/" + friend.username}
               style={{ textDecoration: "none" }}
+              key={id}
             >
               <div className="rightbarFollowing">
                 <img

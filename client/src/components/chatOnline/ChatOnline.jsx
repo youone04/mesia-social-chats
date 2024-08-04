@@ -38,8 +38,8 @@ export default function ChatOnline(props) {
 
   return (
     <div className="chatOnline">
-      {onlineFriends.map((o) => (
-        <div className="chatOnlineFriend" onClick={() => handleClick(o)}>
+      {onlineFriends.map((o, i) => (
+        <div key={i} className="chatOnlineFriend" onClick={() => handleClick(o)}>
           <div className="chatOnlineImgContainer">
             <img
               className="chatOnlineImg"
