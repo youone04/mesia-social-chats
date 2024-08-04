@@ -1,0 +1,21 @@
+
+### harus ada conversation dulu agar bisa chat
+
+POST http://localhost:8800/api/conversations HTTP/1.1
+content-type: application/json
+
+{
+    "senderId": "66aef10f72f121bf2237bb37",
+    "receiverId": "66aef96f72f121bf2237bb3e"
+}
+
+### conversationId digunakan disini
+
+POST http://localhost:8800/api/messages HTTP/1.1
+content-type: application/json
+
+{
+    "sender" : "66aef10f72f121bf2237bb37",
+    "text": "hy",
+    "conversationId" : "66aef6ae72f121bf2237bb39"
+}

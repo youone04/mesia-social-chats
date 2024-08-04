@@ -10,19 +10,20 @@ const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
 const conversationRoute = require("./routes/conversations");
 const messageRoute = require("./routes/message");
-const router = express.Router();
 const path = require("path");
+const connectDB = require("./config/databse");
 
 dotenv.config();
 
 
-mongoose 
- .connect(process.env.MONGO_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,   })   
- .then(() => console.log("Database connected!"))
- .catch(err => console.log(err));
+// mongoose 
+//  .connect(process.env.MONGO_URL, {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true,
+//         useCreateIndex: true,   })   
+//  .then(() => console.log("Database connected!"))
+//  .catch(err => console.log(err));
+connectDB();
  
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
