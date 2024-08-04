@@ -11,12 +11,12 @@ export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
-  const [followed, setFollowed] = useState(
-    currentUser.followings.includes(user?.id)
-  );
+  const [followed, setFollowed] = useState(null);
 
   useEffect(() => {
+    setFollowed(currentUser.followings.includes(user?._id))
     const getFriends = async () => {
+
       try {
         const friendList = await axios.get("/users/friends/" + user._id);
         setFriends(friendList.data);
@@ -27,6 +27,7 @@ export default function Rightbar({ user }) {
     getFriends();
   }, [user]);
 
+
   const handleClick = async () => {
     try {
       if (followed) {
@@ -35,6 +36,10 @@ export default function Rightbar({ user }) {
         });
         dispatch({ type: "UNFOLLOW", payload: user._id });
       } else {
+        await axios.post(`/conversations`, {
+          senderId: currentUser._id,
+          receiverId: user._id
+        });
         await axios.put(`/users/${user._id}/follow`, {
           userId: currentUser._id,
         });

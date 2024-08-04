@@ -19,3 +19,13 @@ content-type: application/json
     "text": "hy",
     "conversationId" : "66aef6ae72f121bf2237bb39"
 }
+
+###
+POST http://localhost:8800/api/post HTTP/1.1
+content-type: application/json
+
+{
+    "sender" : "66aef10f72f121bf2237bb37",
+    "text": "hy",
+    "conversationId" : "66aef6ae72f121bf2237bb39"
+}
