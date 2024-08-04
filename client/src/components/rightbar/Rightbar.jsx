@@ -11,14 +11,16 @@ export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
-  const [followed, setFollowed] = useState(null);
+  const [followed, setFollowed] = useState(false);
+  const [followBack, setFollowBack] = useState(false)
 
   useEffect(() => {
-    setFollowed(currentUser.followings.includes(user?._id))
+    setFollowed(currentUser.followings.includes(user?._id));
+    setFollowBack(user?.followings?.includes(currentUser?._id) || false)
     const getFriends = async () => {
 
       try {
-        const friendList = await axios.get("/users/friends/" + user._id);
+        const friendList = await axios.get("/users/friends/" + user?._id);
         setFriends(friendList.data);
       } catch (err) {
         console.log(err);
@@ -35,7 +37,13 @@ export default function Rightbar({ user }) {
           userId: currentUser._id,
         });
         dispatch({ type: "UNFOLLOW", payload: user._id });
-      } else {
+      } else if (followBack) {
+        await axios.put(`/users/${user._id}/follow`, {
+          userId: currentUser._id,
+        });
+        dispatch({ type: "FOLLOW", payload: user._id });
+      }
+      else {
         await axios.post(`/conversations`, {
           senderId: currentUser._id,
           receiverId: user._id
@@ -73,9 +81,9 @@ export default function Rightbar({ user }) {
   const ProfileRightbar = () => {
     return (
       <>
-        {user.username !== currentUser.username && (
+        {user?.username !== currentUser?.username && (
           <button className="rightbarFollowButton" onClick={handleClick}>
-            {followed ? "Unfollow" : "Follow"}
+            {followed ? "Unfollow" : followBack? "Follow Back" : "Follow"}
             {followed ? <Remove /> : <Add />}
           </button>
         )}
@@ -95,8 +103,8 @@ export default function Rightbar({ user }) {
               {user.relationship === 1
                 ? "Single"
                 : user.relationship === 1
-                ? "Married"
-                : "-"}
+                  ? "Married"
+                  : "-"}
             </span>
           </div>
         </div>
