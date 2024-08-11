@@ -47,15 +47,15 @@ export default function Messenger() {
       setOnlineUsers(user.followings.filter(f => users.some(u => u.userId === f)))
     });
 
-    return () => {
-      socket.current.off("getUsers", handleGetUsers);
-    };
+    // return () => {
+    //   socket.current.off("getUsers", handleGetUsers);
+    // };
 
   }, [user?._id]);
 
-  const handleGetUsers = (users) => {
-    setOnlineUsers(user.followings.filter(f => users.some(u => u.userId === f)));
-  };
+  // const handleGetUsers = (users) => {
+  //   setOnlineUsers(user.followings.filter(f => users.some(u => u.userId === f)));
+  // };
 
   useEffect(() => {
     const getConversations = async () => {

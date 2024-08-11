@@ -22,7 +22,9 @@
 }
 
 .topbarCenter {
+  display: flex;
   flex: 5;
+  justify-content: center;
 }
 
 .searchbar {
@@ -93,4 +95,57 @@
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
+}
+
+.searchInput {
+  position: relative;
+  padding-right: 30px; /* Adjust padding to make room for the loading icon */
+}
+
+.loading {
+  content: "";
+  position: relative;
+  top: 30%;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #ccc;
+  border-top: 2px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  transform: translateY(-50%);
+  left: 40px;
+}
+
+@keyframes spin {
+  0% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+.suggestionsContainer {
+  position: absolute;
+  top: 100%; /* Position below the search input */
+  width:40%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.suggestionItem {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.suggestionItem:last-child {
+  border-bottom: none;
+}
+
+.suggestionItem:hover {
+  background-color: #f0f0f0;
 }

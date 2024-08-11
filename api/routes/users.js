@@ -119,4 +119,25 @@ router.put("/:id/unfollow", async (req, res) => {
   }
 });
 
+
+// Endpoint untuk mencari user berdasarkan username
+router.get("/search", async (req, res) => {
+  try {
+    // Ambil query parameter username dari URL
+    const username = req.query.username;
+
+    // Cari pengguna dengan username yang cocok
+    const users = await User.find({ username: { $regex: username, $options: "i" } });
+
+    if (!users) {
+      return res.status(200).json("User not found");
+    }
+
+    // Jika user ditemukan, kembalikan data user
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
